@@ -7,11 +7,11 @@ var db = new sqlite3.Database("data.sqlite");
 var formatTime = d3.timeFormat("%Y-%m-%d");
 
 
-db.each("SELECT dateModified FROM data ORDER BY dateModified DESC LIMIT 1", function(err, timeStart) {
-//var start =  "2017-01-01T10:18:57.452368+03:00"
-var start = timeStart.dateModified
-var end  = formatTime(new Date());
-//var end  = "2017-01-03"
+//db.each("SELECT dateModified FROM data ORDER BY dateModified DESC LIMIT 1", function(err, timeStart) {
+var start =  "2017-09-01T10:18:57.452368+03:00"
+//var start = timeStart.dateModified
+//var end  = formatTime(new Date());
+var end  = "2017-09-03"
 console.log("старт full: "+start); 
 
 
@@ -70,6 +70,8 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 	var dateSigned = data.getJSON().data.dateSigned;
 	var amount = data.getJSON().data.value.amount;	
 	var region = data.getJSON().data.procuringEntity.address.region;	
+	var suppliers = data.getJSON().data.suppliers[0].name;	
+	
 	
 	
 		//////////save//////////////
@@ -91,10 +93,12 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		if(isNaN(data.getJSON().data.numberOfBids)){numberOfBids = 1}
 		else {numberOfBids=data.getJSON().data.numberOfBids};
 		
+		console.log(suppliers)
+		
 		//////////SQLite//////////////
 	db.serialize(function() {	
-	db.run("CREATE TABLE IF NOT EXISTS data (dateModified TEXT,id TEXT,dateSigned TEXT,first TEXT,tenderID TEXT,procuringEntity TEXT,numberOfBids INT,startAmount INT,amount INT,save INT,cpv TEXT,region TEXT,up INT,down INT,downDate TEXT,upDates TEXT)");
-	var statement = db.prepare("INSERT INTO data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 	
+	db.run("CREATE TABLE IF NOT EXISTS data (dateModified TEXT,id TEXT,dateSigned TEXT,first TEXT,tenderID TEXT,suppliers TEXT,procuringEntity TEXT,numberOfBids INT,startAmount INT,amount INT,save INT,cpv TEXT,region TEXT,up INT,down INT,downDate TEXT,upDates TEXT)");
+	var statement = db.prepare("INSERT INTO data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 	
 	statement.run(
 	item.dateModified,
 	id,
@@ -102,6 +106,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 	first,
 	data.getJSON().data.tenderID,
 	data.getJSON().data.procuringEntity.name.toUpperCase(),
+	suppliers,
 	numberOfBids,
 	startAmount,
 	amount,
@@ -153,4 +158,4 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 
 piv ();	
 
-})
+//})
