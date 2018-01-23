@@ -93,7 +93,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		if(isNaN(data.getJSON().data.numberOfBids)){numberOfBids = 1}
 		else {numberOfBids=data.getJSON().data.numberOfBids};
 		
-		console.log(suppliers)
+		
 		
 		//////////SQLite//////////////
 	db.serialize(function() {	
