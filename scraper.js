@@ -8,10 +8,10 @@ var formatTime = d3.timeFormat("%Y-%m-%d");
 
 
 //db.each("SELECT dateModified FROM data ORDER BY dateModified DESC LIMIT 1", function(err, timeStart) {
-var start =  "2017-09-01T10:18:57.452368+03:00"
+var start =  "2017-09-04T14:27:38.220676+03:00"
 //var start = timeStart.dateModified
 //var end  = formatTime(new Date());
-var end  = "2017-09-03"
+var end  = "2017-10-04"
 console.log("старт full: "+start); 
 
 
