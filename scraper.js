@@ -6,7 +6,7 @@ var db = new sqlite3.Database("data.sqlite");
 
 var formatTime = d3.timeFormat("%Y-%m-%d");
 
-var dateTime = "2018-01-01"	
+var dateTime = "2018-09-03"	
 
 //db.each("SELECT dateModified FROM data ORDER BY dateModified DESC LIMIT 1", function(err, timeStart) {
 
