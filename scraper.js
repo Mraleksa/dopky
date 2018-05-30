@@ -13,8 +13,7 @@ var dateTime = "2018-01-01"
 
 //})
 db.serialize(function() {
-    //db.run("SELECT dateModified FROM data ORDER BY dateModified DESC LIMIT 10");
-    // db.run("DELETE from data WHERE date(dateModified)<date('"+dateTime+"') ");
-	db.run("DELETE from data WHERE numberOfBids=4");
+     db.run("DELETE from data WHERE date(dateModified)>date('"+dateTime+"') ");
+	//db.run("DELETE from data WHERE numberOfBids=4");
 })
 db.close();
