@@ -6,7 +6,7 @@ var db = new sqlite3.Database("data.sqlite");
 
 var formatTime = d3.timeFormat("%Y-%m-%d");
 
-var dateTime = "2017-11-01"	
+var dateTime = "2018-01-01"	
 
 //db.each("SELECT dateModified FROM data ORDER BY dateModified DESC LIMIT 1", function(err, timeStart) {
 
@@ -14,6 +14,6 @@ var dateTime = "2017-11-01"
 //})
 db.serialize(function() {
    // db.run("SELECT dateModified FROM data ORDER BY dateModified DESC LIMIT 10");
-	db.run("DELETE from data WHERE date(formatTime(dateModified))>date('"+dateTime+"') ");
+	db.run("DELETE from data WHERE date(dateModified)>date('"+dateTime+"') ");
 })
 db.close();
