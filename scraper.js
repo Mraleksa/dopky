@@ -14,6 +14,6 @@ var dateTime = "2018-01-01"
 //})
 db.serialize(function() {
      //db.run("DELETE from data WHERE date(dateModified)>date('"+dateTime+"') ");
-	db.run("DELETE from data WHERE date(dateSigned)>date('2018-10-01') ");
+	db.run("DELETE from data WHERE date(dateSigned)<date('2017-10-01T10:32:30.371699+03:00') ");
 })
 db.close();
